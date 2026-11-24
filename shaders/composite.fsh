@@ -38,5 +38,4 @@ void main() {
 	vec3 skylight = light.g * SkyLightColor;
 	vec3 sunlight = mix(SunLightColor,ShadowLightColor,(dot(sunPos,normal)-1)*-0.5);
 	color.rgb *= blocklight + skylight + sunlight + Ambient;
-	color.rgb = normal * 0.5 - 1;
 }
