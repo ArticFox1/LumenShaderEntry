@@ -2,6 +2,9 @@
 
 out vec2 texcoord;
 out vec4 glcolor;
+out vec3 normal;
+
+uniform mat4 gbufferModelViewInverse;
 
 void main() {
 	gl_Position = ftransform();

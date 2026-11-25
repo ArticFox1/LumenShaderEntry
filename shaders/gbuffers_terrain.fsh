@@ -2,6 +2,7 @@
 
 uniform sampler2D lightmap;
 uniform sampler2D gtexture;
+uniform sampler2D colortex2;
 
 uniform float alphaTestRef = 0.1;
 
@@ -18,9 +19,13 @@ layout(location = 2) out vec4 normalOutput;
 void main() {
 	color = texture(gtexture, texcoord) * glcolor;
 	color *= texture(lightmap, lmcoord);
-	lightData = vec4(lmcoord, 0, 1);
-	normalOutput = vec4(normal * 0.5 + 0.5, 1);
 	if (color.a < alphaTestRef) {
 		discard;
 	}
+	lightData = vec4(lmcoord, 0, 1);
+	vec3 oldNormal = texture(colortex2,texcoord).rgb;
+	if (oldNormal == vec3(0)) {
+		return;
+	}
+	normalOutput = vec4(normal * 0.5 + 0.5, 1);
 }
